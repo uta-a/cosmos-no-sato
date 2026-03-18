@@ -261,6 +261,20 @@
   overflow-y: auto;
   background: transparent;
   padding: 8px;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 40px,
+    black calc(100% - 40px),
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 40px,
+    black calc(100% - 40px),
+    transparent
+  );
 }
 
 /* Custom scrollbar */
@@ -283,15 +297,18 @@
 
 /* ===== List Item (postcard card) ===== */
 .listItem {
+  cursor: pointer;
   position: relative;
   display: flex;
   align-items: flex-start;
   gap: 16px;
   padding: 24px 28px;
-  background: var(--color-paper);
-  border: 2px solid var(--color-envelope);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-letter);
+  box-shadow: var(--shadow-md);
   margin-bottom: 16px;
   transition:
     background-color 0.3s var(--ease-out),
@@ -304,9 +321,9 @@
 }
 
 .listItemActive {
-  background-color: #FFF5EB;
+  background-color: rgba(255, 245, 235, 0.9);
   border-color: var(--color-primary);
-  box-shadow: var(--shadow-letter);
+  box-shadow: var(--shadow-md);
 }
 
 /* Stamp decoration */
@@ -423,6 +440,8 @@
   .detailPanel {
     position: static;
     max-height: none;
+    mask-image: none;
+    -webkit-mask-image: none;
   }
 
   .card {

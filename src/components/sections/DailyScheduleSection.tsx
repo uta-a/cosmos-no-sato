@@ -58,10 +58,12 @@ function TimelineItem({
 
 function ScheduleListPanel({
   selectedIndex,
+  onSelect,
   itemRefs,
   panelRef,
 }: {
   selectedIndex: number;
+  onSelect: (index: number) => void;
   itemRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
   panelRef: React.RefObject<HTMLDivElement | null>;
 }) {
@@ -72,6 +74,15 @@ function ScheduleListPanel({
           key={item.time}
           ref={(el) => { itemRefs.current[index] = el; }}
           className={`${styles.listItem} ${selectedIndex === index ? styles.listItemActive : ''}`}
+          onClick={() => onSelect(index)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onSelect(index);
+            }
+          }}
         >
           <div className={styles.listItemStamp} />
           <span className={`material-symbols-outlined ${styles.listItemIcon}`}>
@@ -137,7 +148,7 @@ export default function DailyScheduleSection() {
               <span className={`material-symbols-outlined ${styles.timelineCapIcon}`}>bedtime</span>
             </span>
           </div>
-          <ScheduleListPanel selectedIndex={selectedIndex} itemRefs={itemRefs} panelRef={panelRef} />
+          <ScheduleListPanel selectedIndex={selectedIndex} onSelect={setSelectedIndex} itemRefs={itemRefs} panelRef={panelRef} />
         </div>
       </div>
     </section>
