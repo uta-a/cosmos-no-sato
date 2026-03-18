@@ -1,41 +1,145 @@
+@keyframes blobBreathe1 {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 1; }
+  50% { transform: scale(1.08) translate(4px, -3px); opacity: 1.25; }
+}
+
+@keyframes blobBreathe2 {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 1; }
+  50% { transform: scale(1.06) translate(-3px, 4px); opacity: 1.2; }
+}
+
 .company {
-  background-color: var(--color-bg);
+  position: relative;
+  background-color: var(--color-cream);
+  overflow-x: clip;
+}
+
+/* Background decorative shapes */
+.company::before,
+.company::after {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.company::before {
+  content: '';
+  top: -80px;
+  right: -20px;
+  width: 680px;
+  height: 800px;
+  background: radial-gradient(ellipse, rgba(232, 145, 58, 0.35) 0%, rgba(232, 145, 58, 0.30) 50%, transparent 62%);
+  animation: blobBreathe1 12s var(--ease-in-out) infinite;
+  will-change: transform, opacity;
+}
+
+.company::after {
+  content: '';
+  bottom: -80px;
+  left: -20px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(123, 166, 123, 0.32) 0%, rgba(123, 166, 123, 0.26) 50%, transparent 62%);
+  animation: blobBreathe2 16s var(--ease-in-out) infinite;
+  will-change: transform, opacity;
+}
+
+/* Subtle diagonal stripe background */
+.bgPattern {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(60, 50, 38, 0.02) 10px,
+    rgba(60, 50, 38, 0.02) 11px
+  );
+  pointer-events: none;
 }
 
 .layout {
   display: flex;
-  gap: 40px;
+  gap: 48px;
   align-items: flex-start;
+  position: relative;
 }
 
-.left {
-  flex: 0 0 45%;
-  max-width: 45%;
+/* ===== Photo collage area ===== */
+.photoArea {
+  flex: 0 0 50%;
+  max-width: 50%;
+  position: relative;
 }
 
-.right {
-  flex: 0 0 55%;
-  max-width: 55%;
+.collage {
+  position: relative;
+  padding: 24px;
+  min-height: 360px;
 }
 
-/* Corporation info card */
-.corpImage {
+.photoBack,
+.photoFront {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 4px solid var(--color-white);
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.photoBack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 75%;
+  transform: rotate(1deg);
+  z-index: 1;
+}
+
+.photoFront {
+  position: relative;
+  width: 80%;
+  margin-left: auto;
+  transform: rotate(-2deg);
+  z-index: 2;
+}
+
+.collage:hover .photoBack {
+  transform: rotate(0) scale(1.02);
+}
+
+.collage:hover .photoFront {
+  transform: rotate(0) scale(1.02);
+}
+
+.photoBack img,
+.photoFront img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: 8px;
   display: block;
 }
 
-.infoTable {
-  margin-top: 24px;
+/* ===== Frosted glass info card ===== */
+.infoCard {
+  position: relative;
+  z-index: 3;
+  margin-top: -40px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .infoTable dt {
   color: var(--color-text-secondary);
   font-weight: 700;
-  font-size: 0.875rem;
-  padding: 12px 0 4px;
+  font-size: 0.8125rem;
+  padding: 10px 0 2px;
   border-top: 1px solid var(--color-beige-dark);
 }
 
@@ -46,56 +150,164 @@
 
 .infoTable dd {
   color: var(--color-text-primary);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1.7;
   margin: 0;
-  padding-bottom: 12px;
+  padding-bottom: 8px;
 }
 
-/* Group companies */
+/* ===== Group companies area ===== */
+.groupArea {
+  flex: 1;
+}
+
 .groupHeading {
   font-family: var(--font-serif);
   font-size: 1.375rem;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   color: var(--color-text-primary);
   letter-spacing: 0.04em;
 }
 
-.companyList {
-  display: flex;
-  flex-direction: column;
+.companyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 
 .companyCard {
-  background-color: var(--color-beige);
-  padding: 20px 24px;
-  border-radius: var(--radius);
-  border-left: 3px solid var(--color-primary);
+  position: relative;
+  background-color: var(--color-paper);
+  padding: 24px 20px;
+  border-radius: 3px;
+  box-shadow: var(--shadow-letter);
+  border: 1px solid var(--color-envelope);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+/* Wax seal decoration */
+.companyCard::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 24px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-color, var(--color-primary));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Small stamp decoration */
+.companyCard::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 34px;
+  border: 2px dashed var(--color-stamp-red);
+  background: rgba(199, 91, 74, 0.06);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+.companyCard:hover {
+  transform: rotate(-1.5deg) translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cardIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  color: var(--color-text-secondary);
 }
 
 .companyName {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   color: var(--color-text-primary);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  line-height: 1.4;
 }
 
 .companyAddress {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--color-text-secondary);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
+/* ===== SP ===== */
 @media (max-width: 768px) {
-  .layout {
-    flex-direction: column;
+  .company::before {
+    width: 400px;
+    height: 480px;
+    top: -50px;
+    right: -10px;
   }
 
-  .left,
-  .right {
-    flex: 1 1 auto;
+  .company::after {
+    width: 420px;
+    height: 420px;
+    bottom: -50px;
+    left: -10px;
+  }
+
+  .layout {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .photoArea {
+    flex: none;
     max-width: 100%;
+    width: 100%;
+  }
+
+  .collage {
+    padding: 0;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .photoBack {
+    position: relative;
+    width: 100%;
+    transform: none;
+  }
+
+  .photoFront {
+    width: 100%;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .collage:hover .photoBack,
+  .collage:hover .photoFront {
+    transform: none;
+  }
+
+  .infoCard {
+    margin-top: 16px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-white);
+  }
+
+  .groupArea {
+    width: 100%;
+  }
+
+  .companyGrid {
+    grid-template-columns: 1fr;
   }
 
   .groupHeading {

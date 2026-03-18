@@ -52,13 +52,13 @@ export const FEATURES: Feature[] = [
 ];
 
 export const SCHEDULE: ScheduleItem[] = [
-  { time: '7:00', activity: '起床・身支度', icon: 'wb_sunny' },
-  { time: '8:00', activity: '朝食', icon: 'restaurant' },
-  { time: '10:00', activity: '体操・レクリエーション', icon: 'fitness_center' },
-  { time: '12:00', activity: '昼食', icon: 'lunch_dining' },
-  { time: '15:00', activity: 'おやつ・余暇活動', icon: 'coffee' },
-  { time: '18:00', activity: '夕食', icon: 'dinner_dining' },
-  { time: '21:00', activity: '就寝', icon: 'bedtime' },
+  { time: '7:00', activity: '起床・身支度', icon: 'wb_sunny', description: 'スタッフが優しくお声かけし、ご自身のペースで身支度を整えていただきます。洗面や着替えなど、できることはご自身で行い、必要な部分だけお手伝いします。' },
+  { time: '8:00', activity: '朝食', icon: 'restaurant', description: '栄養バランスを考えた手作りの朝食をご用意しています。ご入居者の皆さまと一緒にテーブルを囲み、家庭的な雰囲気の中でお召し上がりいただきます。' },
+  { time: '10:00', activity: '体操・レクリエーション', icon: 'fitness_center', description: '季節の歌に合わせた体操や、手先を使った工作、ゲームなど、楽しみながら心身の機能維持につながる活動を行っています。' },
+  { time: '12:00', activity: '昼食', icon: 'lunch_dining', description: '旬の食材を使った昼食をご提供。食事の準備や配膳のお手伝いをしていただくこともあり、生活リハビリの一環となっています。' },
+  { time: '15:00', activity: 'おやつ・余暇活動', icon: 'coffee', description: 'お茶とおやつを楽しみながら、おしゃべりやテレビ鑑賞、散歩など、それぞれがお好きな過ごし方でゆったりとした時間を過ごします。' },
+  { time: '18:00', activity: '夕食', icon: 'dinner_dining', description: '一日の締めくくりに、温かい夕食をみんなで囲みます。食後は居室でくつろいだり、他の入居者との団らんを楽しんだりしていただけます。' },
+  { time: '21:00', activity: '就寝', icon: 'bedtime', description: 'ご自身のペースで就寝準備を整えます。夜間もスタッフが常駐しており、安心しておやすみいただけます。' },
 ];
 
 export const FLOW_STEPS: FlowStep[] = [
@@ -93,21 +93,25 @@ export const GROUP_COMPANIES: GroupCompany[] = [
     name: 'デイサービスセンター コスモス',
     address: '広島県福山市駅家町万能倉1256-1',
     url: '',
+    icon: 'elderly',
   },
   {
     name: 'ヘルパーステーション コスモス',
     address: '広島県福山市駅家町万能倉1256-1',
     url: '',
+    icon: 'volunteer_activism',
   },
   {
     name: 'ケアプランセンター コスモス',
     address: '広島県福山市駅家町万能倉1256-1',
     url: '',
+    icon: 'assignment',
   },
   {
     name: 'コスモス訪問看護ステーション',
     address: '広島県福山市駅家町万能倉1256-1',
     url: '',
+    icon: 'local_hospital',
   },
 ];
 
@@ -121,4 +125,10 @@ export const COMPANY_INFO = {
   tel: TEL,
   fax: FAX,
   image: '/images/入り口1.jpg',
+  subImage: '/images/施設外観.jpg',
 };
+
+export const HERO_ACCENT_IMAGES = [
+  { src: '/images/風鈴.jpg', alt: '風鈴', position: 'left' as const },
+  { src: '/images/ハロウィン.jpg', alt: 'ハロウィンイベント', position: 'right' as const },
+];

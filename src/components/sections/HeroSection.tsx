@@ -1,4 +1,4 @@
-import { HERO } from '../../data/siteData';
+import { HERO, HERO_ACCENT_IMAGES } from '../../data/siteData';
 import Button from '../ui/Button';
 import styles from './HeroSection.module.css';
 
@@ -11,6 +11,17 @@ export default function HeroSection() {
         className={styles.backgroundImage}
       />
       <div className={styles.overlay} aria-hidden="true" />
+      <div className={styles.dotTexture} aria-hidden="true" />
+
+      {HERO_ACCENT_IMAGES.map((img) => (
+        <div
+          key={img.position}
+          className={`${styles.floatingPhoto} ${img.position === 'left' ? styles.floatingLeft : styles.floatingRight}`}
+          aria-hidden="true"
+        >
+          <img src={img.src} alt={img.alt} />
+        </div>
+      ))}
 
       <div className={styles.content}>
         <span className={styles.label}>{HERO.label}</span>
@@ -25,6 +36,8 @@ export default function HeroSection() {
         </h1>
 
         <p className={styles.subCopy}>{HERO.subCopy}</p>
+
+        <div className={styles.divider} aria-hidden="true" />
 
         <div className={styles.cta}>
           <Button href="#contact" icon="arrow_forward">

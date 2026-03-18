@@ -9,6 +9,7 @@ export interface ScheduleItem {
   time: string;
   activity: string;
   icon: string;
+  description?: string;
 }
 
 export interface FlowStep {
@@ -22,6 +23,7 @@ export interface GroupCompany {
   name: string;
   address: string;
   url: string;
+  icon?: string;
 }
 
 export interface NavItem {
